@@ -1,10 +1,10 @@
 :host {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 15px;
+  right: 15px;
   min-width: 500px;
-  min-height: 200px;
-  border: 1px dashed red;
+  min-height: 100px;
+  border: 1px dashed grey;
   padding: 15px;
-  background: #eee;
+  background: #333;
 }

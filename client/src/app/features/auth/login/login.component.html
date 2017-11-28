@@ -1,0 +1,37 @@
+﻿<div class="row" id="wrap">
+  <div class="col-sm-8 col-md-6 col-lg-4 offset-sm-2 offset-md-3 offset-lg-4">
+    <div class="card">
+      <div class="card-header bg-transparent text-center">Login</div>
+      <img class="card-img-top" width="40" src="https://cdn.pixabay.com/photo/2017/10/31/05/07/insight-2904292_960_720.png" alt="Card image cap">
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                <label for="username">Username</label>
+                <input id="username" type="text" class="form-control" name="username" [(ngModel)]="model.username"
+                       #username="ngModel" required/>
+                <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+              </div>
+              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control" name="password" [(ngModel)]="model.password"
+                       #password="ngModel" required/>
+                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+              </div>
+              <div class="form-group text-right">
+                <button [disabled]="loading || !f.form.valid" class="btn btn-primary btn-block">Login</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer bg-transparent text-center">No account yet? <a [routerLink]="['/register']" class="btn btn-link">Register</a></div>
+    </div>
+
+
+  </div>
+</div>

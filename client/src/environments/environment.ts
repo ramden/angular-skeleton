@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   // Theme options
   theme: {
-    defaultTheme: 'flatly', // All available themes are found here: https://bootswatch.com
+    defaultTheme: 'lumen', // All available themes are found here: https://bootswatch.com
     themeBoxVisible: true,
     bootswatchThemes: [
       'Cerulean',
