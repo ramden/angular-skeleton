@@ -32,5 +32,10 @@ export const environment = {
       'United',
       'Yeti',
     ]
+  },
+  auth: {
+    logoUrl: 'https://raw.githubusercontent.com/vadymmarkov/Fakery/master/Images/logo.png',
+    registrationEnabled: true,
+    resetPasswordEnabled: true
   }
 };

@@ -4,16 +4,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthGuard} from './auth.guard';
 import {AuthRoutingModule} from './auth-routing.module';
-import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationService} from './authentication.service';
 import {UserService} from './user.service';
-import {AlertService} from '../../shared/alert.service';
-import {SharedModule} from '../../shared/shared.module';
+import {SharedModule} from '@app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     AuthRoutingModule,
     SharedModule
   ],

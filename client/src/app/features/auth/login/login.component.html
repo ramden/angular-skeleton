@@ -1,35 +1,61 @@
 ﻿<div class="row" id="wrap">
   <div class="col-sm-8 col-md-6 col-lg-4 offset-sm-2 offset-md-3 offset-lg-4">
-    <div class="card">
-      <div class="card-header bg-transparent text-center">Login</div>
-      <img class="card-img-top" width="40" src="https://cdn.pixabay.com/photo/2017/10/31/05/07/insight-2904292_960_720.png" alt="Card image cap">
+    <div class="card animated zoomIn">
 
+      <img class="card-img-top" [src]="authConfig.logoUrl" alt="logo">
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
-            <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" type="text" class="form-control" name="username" [(ngModel)]="model.username"
-                       #username="ngModel" required/>
-                <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+                <input id="username"
+                       type="text"
+                       class="form-control"
+                       formControlName="username"
+                       [class.is-invalid]="username.invalid && username.touched"
+                       [class.is-valid]="username.valid && username.touched">
+                <div *ngIf="username.invalid && (username.dirty || username.touched)" class="invalid-feedback">
+                  <div *ngIf="username.errors.required">Username is required</div>
+                  <div *ngIf="username.errors.email">Username is not a valid email</div>
+                </div>
+
               </div>
-              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+              <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" class="form-control" name="password" [(ngModel)]="model.password"
-                       #password="ngModel" required/>
-                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                <input id="password"
+                       type="password"
+                       class="form-control"
+                       formControlName="password"
+                       [class.is-invalid]="password.invalid && password.touched"
+                       [class.is-valid]="password.valid && password.touched">
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                  <div *ngIf="password.errors.required">Username is required</div>
+                </div>
               </div>
               <div class="form-group text-right">
-                <button [disabled]="loading || !f.form.valid" class="btn btn-primary btn-block">Login</button>
-                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                <div *ngIf="loading" class="progress animated flip infinite" style="margin-bottom: 15px">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated"
+                       role="progressbar"
+                       aria-valuenow="100"
+                       aria-valuemin="0"
+                       aria-valuemax="100"
+                       style="width: 100%">
+                  </div>
+                </div>
+                <div *ngIf="authConfig.resetPasswordEnabled" class="form-group text-right">
+                  <a href="#">Forgot password</a>
+                </div>
+                <button [disabled]="loading || loginForm.invalid" class="btn btn-primary btn-block" type="submit">Login</button>
               </div>
             </form>
           </div>
         </div>
 
       </div>
-      <div class="card-footer bg-transparent text-center">No account yet? <a [routerLink]="['/register']" class="btn btn-link">Register</a></div>
+      <div *ngIf="authConfig.registrationEnabled" class="card-footer bg-transparent text-center">
+        No account yet? <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+      </div>
     </div>
 
 

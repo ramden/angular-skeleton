@@ -1,7 +1,9 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from '../authentication.service';
-import {AlertService} from '../../../shared/alert.service';
+import {AlertService} from '@app/shared/alert.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {environment} from '@app/../environments/environment';
 
 @Component({
   moduleId: module.id,
@@ -10,14 +12,32 @@ import {AlertService} from '../../../shared/alert.service';
 })
 
 export class LoginComponent implements OnInit {
-  model: any = {};
   loading = false;
   returnUrl: string;
+
+  public loginForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private authenticationService: AuthenticationService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private fb: FormBuilder) {
+    this.loginForm = fb.group({
+      username: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required]
+    });
+  }
+
+  get authConfig() {
+    return environment.auth;
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   ngOnInit() {
@@ -30,6 +50,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false
+    }, 5000);
+
+    /*
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
         data => {
@@ -39,5 +65,6 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         });
+        */
   }
 }
